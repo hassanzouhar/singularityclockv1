@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Singularity Clock</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Roboto+Mono:wght@700&display=swap');
 
         :root {
             --bg-color: #0f0f0f;
@@ -13,6 +13,8 @@
             --accent-color: #00ffff;
             --secondary-color: #ff00ff;
             --neutral-color: #333333;
+            --flip-bg: #222;
+            --flip-color: #f0f0f0;
         }
 
         * {
@@ -26,6 +28,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
+            height: 100%;
         }
 
         .container {
@@ -69,21 +72,80 @@
         .hero {
             height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: 3rem;
             margin-bottom: 20px;
             font-weight: 700;
         }
 
-        .tagline {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            font-weight: 300;
+        .flip-clock {
+            display: flex;
+            margin: 30px 0;
+        }
+
+        .flip-unit {
+            margin: 0 5px;
+        }
+
+        .flip-card {
+            display: block;
+            position: relative;
+            padding-bottom: 120px;
+            font-size: 140px;
+            line-height: 140px;
+            border-radius: 10px;
+            background-color: var(--flip-bg);
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .flip-card .top,
+        .flip-card .bottom,
+        .flip-card .back-top,
+        .flip-card .back-bottom {
+            height: 70px;
+            color: var(--flip-color);
+            background-color: var(--flip-bg);
+            padding: 0 10px;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .flip-card .top,
+        .flip-card .back-top {
+            line-height: 140px;
+            border-bottom: 1px solid #000;
+        }
+
+        .flip-card .bottom,
+        .flip-card .back-bottom {
+            line-height: 0;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .flip-card .top::before,
+        .flip-card .bottom::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.1);
+            height: 5px;
+            z-index: 5;
+        }
+
+        .flip-card .top::before {
+            bottom: 0;
+        }
+
+        .flip-card .bottom::after {
+            top: 0;
         }
 
         .cta-button {
@@ -94,48 +156,11 @@
             text-decoration: none;
             font-weight: 700;
             transition: all 0.3s ease;
+            margin-top: 30px;
         }
 
         .cta-button:hover {
             background-color: var(--text-color);
-        }
-
-        .features {
-            padding: 100px 0;
-            background-color: var(--neutral-color);
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-        }
-
-        .feature-item {
-            background: var(--bg-color);
-            padding: 30px;
-            transition: all 0.3s ease;
-        }
-
-        .feature-item h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--accent-color);
-        }
-
-        .data-viz {
-            padding: 100px 0;
-        }
-
-        .data-viz h2 {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        #ai-progress-chart {
-            background: var(--neutral-color);
-            padding: 20px;
         }
 
         footer {
@@ -144,19 +169,32 @@
             text-align: center;
             padding: 20px 0;
             font-size: 0.9rem;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
         }
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 3rem;
+                font-size: 2rem;
             }
 
-            .tagline {
-                font-size: 1.2rem;
+            .flip-card {
+                font-size: 100px;
+                line-height: 100px;
+                padding-bottom: 85px;
             }
 
-            .feature-grid {
-                grid-template-columns: 1fr;
+            .flip-card .top,
+            .flip-card .bottom,
+            .flip-card .back-top,
+            .flip-card .back-bottom {
+                height: 50px;
+            }
+
+            .flip-card .top,
+            .flip-card .back-top {
+                line-height: 100px;
             }
         }
     </style>
@@ -175,42 +213,41 @@
     </header>
 
     <main>
-        <section id="about" class="hero">
-            <div class="hero-content">
-                <h1>Singularity Clock</h1>
-                <p class="tagline">Forecasting the future of AI</p>
-                <a href="#" class="cta-button">Learn More</a>
-            </div>
-        </section>
-
-        <section id="features" class="features">
-            <div class="container">
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <h3>Feature 1</h3>
-                        <p>Description of feature 1.</p>
+        <section class="hero">
+            <h1>Singularity Clock</h1>
+            <div class="flip-clock">
+                <div class="flip-unit">
+                    <div class="flip-card">
+                        <div class="top">2</div>
+                        <div class="bottom">2</div>
                     </div>
-                    <div class="feature-item">
-                        <h3>Feature 2</h3>
-                        <p>Description of feature 2.</p>
+                </div>
+                <div class="flip-unit">
+                    <div class="flip-card">
+                        <div class="top">2</div>
+                        <div class="bottom">2</div>
                     </div>
-                    <div class="feature-item">
-                        <h3>Feature 3</h3>
-                        <p>Description of feature 3.</p>
+                </div>
+                <div class="flip-unit">
+                    <div class="flip-card">
+                        <div class="top">:</div>
+                        <div class="bottom">:</div>
                     </div>
-                    <div class="feature-item">
-                        <h3>Feature 4</h3>
-                        <p>Description of feature 4.</p>
+                </div>
+                <div class="flip-unit">
+                    <div class="flip-card">
+                        <div class="top">0</div>
+                        <div class="bottom">0</div>
+                    </div>
+                </div>
+                <div class="flip-unit">
+                    <div class="flip-card">
+                        <div class="top">5</div>
+                        <div class="bottom">5</div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <section id="data" class="data-viz">
-            <div class="container">
-                <h2>AI Progress Visualization</h2>
-                <div id="ai-progress-chart"></div>
-            </div>
+            <a href="#" class="cta-button">Learn More</a>
         </section>
     </main>
 
