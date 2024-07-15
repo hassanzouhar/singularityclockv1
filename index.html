@@ -18,14 +18,38 @@
         }
 
         header {
-            background: #00c6a7;
-            color: #fff;
-            padding: 20px;
+            background: #ffaa00;
+            color: #000;
+            padding: 40px 20px;
             text-align: center;
-            font-size: 3em;
+            font-size: 3.5em;
             text-transform: uppercase;
-            position: relative;
-            border-bottom: 10px solid #000;
+            border-bottom: 5px solid #000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 15px 15px 0 #000;
+        }
+
+        header .logo {
+            font-size: 0.8em;
+            text-align: left;
+        }
+
+        header .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        header .menu a {
+            color: #000;
+            text-decoration: none;
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+
+        header .menu a:hover {
+            color: #fff;
         }
 
         .container {
@@ -40,36 +64,42 @@
             width: 100%;
             max-width: 1200px;
             background: #fff;
-            margin: 20px 0;
-            padding: 20px;
+            margin: 30px 0;
+            padding: 30px;
             border: 5px solid #000;
-            box-shadow: 15px 15px 0 #000;
+            box-shadow: 10px 10px 0 #000;
             position: relative;
         }
 
         h2, h3 {
             margin: 0;
             padding: 0;
-            font-size: 2em;
+            font-size: 2.5em;
             text-transform: uppercase;
             margin-bottom: 20px;
         }
 
         p {
-            font-size: 1em;
+            font-size: 1.1em;
             line-height: 1.5;
             margin-bottom: 20px;
         }
 
+        .highlight {
+            color: #ffaa00;
+            background-color: #000;
+            padding: 2px 5px;
+        }
+
         .subscribe-section {
-            background: #ffaa00;
+            background: #00c6a7;
             color: #000;
-            padding: 20px;
+            padding: 40px;
             width: 100%;
             max-width: 1200px;
             text-align: center;
             border: 5px solid #000;
-            box-shadow: 15px 15px 0 #000;
+            box-shadow: 10px 10px 0 #000;
             position: relative;
         }
 
@@ -99,33 +129,56 @@
         }
 
         footer {
-            background: #ffaa00;
+            background: #00c6a7;
             color: #000;
             text-align: center;
-            padding: 20px;
-            border-top: 10px solid #000;
+            padding: 30px;
+            border-top: 5px solid #000;
         }
 
         footer a {
             color: #000;
             text-decoration: none;
-            margin: 0 10px;
+            margin: 0 15px;
             font-size: 1.2em;
         }
 
         footer a:hover {
-            color: #555;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+            }
+
+            header .menu {
+                flex-direction: column;
+            }
+
+            header .menu a {
+                margin-bottom: 10px;
+            }
+
+            .subscribe-section input[type="email"] {
+                width: 80%;
+            }
         }
     </style>
 </head>
 
 <body>
     <header>
-        Singularity Clock
+        <div class="logo">Singularity Clock</div>
+        <div class="menu">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
     </header>
     <div class="container">
         <div class="info-section">
-            <h2>Predicting the Future of AI Adoption</h2>
+            <h2>Predicting the Future of <span class="highlight">AI</span> Adoption</h2>
             <p>We are building a comprehensive platform to track and predict the outcomes of the introduction of broad AI into society. Through meticulous analysis of employment trends, investment patterns, and various economic indicators, coupled with Moore's Law and other predictive models, we aim to provide real-time insights into how quickly AI adoption is accelerating.</p>
         </div>
         <div class="info-section">
