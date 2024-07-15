@@ -270,16 +270,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
     <script>
         $(document).ready(function() {
-            var clock = $('.clock').FlipClock(81480, {
+            var clock = $('.clock').FlipClock({
                 clockFace: 'TwentyFourHourClock',
-                showSeconds: false,
-                autoStart: false
+                autoStart: true,
+                callbacks: {
+                    stop: function() {
+                        $('.message').html('The clock has stopped!')
+                    }
+                }
             });
 
-            setTimeout(function() {
-                clock.decrement(); // Flip to 22:44
-                clock.increment(); // Flip back to 22:45
-            }, 1000);
+            clock.setTime(81480); // Set the time to 22:45
+            clock.setCountdown(false); // This ensures it counts up
+            clock.start();
         });
     </script>
 </body>
