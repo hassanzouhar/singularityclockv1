@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Singularity Clock | Forecasting AI Evolution</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Singularity Clock</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
 
         :root {
-            --bg-color: #0a0a0a;
-            --text-color: #e0e0e0;
-            --accent-color: #00f0ff;
+            --bg-color: #0f0f0f;
+            --text-color: #f0f0f0;
+            --accent-color: #00ffff;
             --secondary-color: #ff00ff;
-            --neumorphic-light: #1a1a1a;
-            --neumorphic-dark: #050505;
+            --neutral-color: #333333;
         }
 
         * {
@@ -24,11 +22,10 @@
         }
 
         body, html {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
         .container {
@@ -38,12 +35,11 @@
         }
 
         header {
-            background: linear-gradient(to right, var(--neumorphic-dark), var(--neumorphic-light));
             padding: 20px 0;
             position: fixed;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 240, 255, 0.1);
+            background-color: rgba(15, 15, 15, 0.9);
         }
 
         nav {
@@ -55,11 +51,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+            color: var(--text-color);
         }
 
         .nav-links a {
@@ -80,36 +72,12 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(45deg, rgba(10,10,10,0.8), rgba(26,26,26,0.8)),
-                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle, transparent 20%, var(--bg-color) 80%);
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
         }
 
         h1 {
             font-size: 4rem;
             margin-bottom: 20px;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
 
         .tagline {
@@ -120,26 +88,21 @@
 
         .cta-button {
             display: inline-block;
-            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
+            background-color: var(--accent-color);
             color: var(--bg-color);
             padding: 12px 30px;
             text-decoration: none;
             font-weight: 700;
-            border-radius: 50px;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.3);
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 240, 255, 0.4);
+            background-color: var(--text-color);
         }
 
         .features {
             padding: 100px 0;
-            background-color: var(--neumorphic-dark);
+            background-color: var(--neutral-color);
         }
 
         .feature-grid {
@@ -149,24 +112,9 @@
         }
 
         .feature-item {
-            background: var(--neumorphic-light);
+            background: var(--bg-color);
             padding: 30px;
-            border-radius: 20px;
-            box-shadow: 10px 10px 20px var(--neumorphic-dark),
-                        -10px -10px 20px var(--neumorphic-light);
             transition: all 0.3s ease;
-        }
-
-        .feature-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 15px 15px 30px var(--neumorphic-dark),
-                        -15px -15px 30px var(--neumorphic-light);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--accent-color);
         }
 
         .feature-item h3 {
@@ -177,27 +125,21 @@
 
         .data-viz {
             padding: 100px 0;
-            background-color: var(--bg-color);
         }
 
         .data-viz h2 {
             font-size: 2.5rem;
             margin-bottom: 40px;
             text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
 
         #ai-progress-chart {
-            background: var(--neumorphic-light);
-            border-radius: 20px;
+            background: var(--neutral-color);
             padding: 20px;
-            box-shadow: inset 5px 5px 10px var(--neumorphic-dark),
-                        inset -5px -5px 10px var(--neumorphic-light);
         }
 
         footer {
-            background-color: var(--neumorphic-dark);
+            background-color: var(--neutral-color);
             color: var(--text-color);
             text-align: center;
             padding: 20px 0;
@@ -236,8 +178,8 @@
         <section id="about" class="hero">
             <div class="hero-content">
                 <h1>Singularity Clock</h1>
-                <p class="tagline">Decoding the Future of AI Integration</p>
-                <a href="#" class="cta-button">Explore the Future</a>
+                <p class="tagline">Forecasting the future of AI</p>
+                <a href="#" class="cta-button">Learn More</a>
             </div>
         </section>
 
@@ -245,24 +187,20 @@
             <div class="container">
                 <div class="feature-grid">
                     <div class="feature-item">
-                        <i class="fas fa-brain feature-icon"></i>
-                        <h3>Quantum Predictions</h3>
-                        <p>Harness quantum algorithms for unparalleled AI forecasting accuracy.</p>
+                        <h3>Feature 1</h3>
+                        <p>Description of feature 1.</p>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-network-wired feature-icon"></i>
-                        <h3>Neural Visualization</h3>
-                        <p>Immerse in 3D representations of evolving AI architectures.</p>
+                        <h3>Feature 2</h3>
+                        <p>Description of feature 2.</p>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-globe feature-icon"></i>
-                        <h3>Global AI Sentiment</h3>
-                        <p>Real-time analysis of worldwide AI discourse and trends.</p>
+                        <h3>Feature 3</h3>
+                        <p>Description of feature 3.</p>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-balance-scale feature-icon"></i>
-                        <h3>Ethical AI Tracker</h3>
-                        <p>Monitor and evaluate ethical implications of AI adoption.</p>
+                        <h3>Feature 4</h3>
+                        <p>Description of feature 4.</p>
                     </div>
                 </div>
             </div>
@@ -271,70 +209,15 @@
         <section id="data" class="data-viz">
             <div class="container">
                 <h2>AI Progress Visualization</h2>
-                <canvas id="ai-progress-chart"></canvas>
+                <div id="ai-progress-chart"></div>
             </div>
         </section>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Singularity Clock. Illuminating the path to technological transcendence.</p>
+            <p>&copy; 2024 Singularity Clock. All rights reserved.</p>
         </div>
     </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-    <script>
-        // Chart.js setup
-        const ctx = document.getElementById('ai-progress-chart').getContext('2d');
-        const chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['2020', '2021', '2022', '2023', '2024', '2025'],
-                datasets: [{
-                    label: 'AI Integration Progress',
-                    data: [20, 35, 55, 75, 90, 98],
-                    borderColor: '#00f0ff',
-                    backgroundColor: 'rgba(0, 240, 255, 0.1)',
-                    tension: 0.4,
-                    borderWidth: 3,
-                    pointBackgroundColor: '#ff00ff',
-                    pointBorderColor: '#00f0ff',
-                    pointRadius: 6,
-                    pointHoverRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 100,
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.1)'
-                        },
-                        ticks: {
-                            color: '#e0e0e0'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.1)'
-                        },
-                        ticks: {
-                            color: '#e0e0e0'
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: '#e0e0e0'
-                        }
-                    }
-                }
-            }
-        });
-    </script>
 </body>
 </html>
