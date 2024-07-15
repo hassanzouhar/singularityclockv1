@@ -5,256 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Singularity Clock</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Roboto+Mono:wght@700&display=swap');
-
-        :root {
-            --bg-color: #0f0f0f;
-            --text-color: #f0f0f0;
-            --accent-color: #00ffff;
-            --secondary-color: #ff00ff;
-            --neutral-color: #333333;
-            --flip-bg: #222;
-            --flip-color: #f0f0f0;
-        }
-
-        * {
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            background-color: #f4f4f4;
+            color: #333;
         }
-
-        body, html {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            height: 100%;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
         header {
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            background-color: rgba(15, 15, 15, 0.9);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-color);
-        }
-
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            margin-left: 30px;
-            font-weight: 400;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-color);
-        }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            background-color: #444;
+            color: white;
+            padding: 10px 0;
             text-align: center;
         }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            font-weight: 700;
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
         }
-
-        .flip-clock {
-            display: flex;
-            margin: 30px 0;
+        h1, h2, h3 {
+            text-align: center;
         }
-
-        .flip-unit {
-            margin: 0 5px;
+        p {
+            line-height: 1.6;
         }
-
-        .flip-card {
-            display: block;
-            position: relative;
-            padding-bottom: 120px;
-            font-size: 140px;
-            line-height: 140px;
-            border-radius: 10px;
-            background-color: var(--flip-bg);
-            font-family: 'Roboto Mono', monospace;
+        .subscribe-section {
+            background-color: #eee;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
         }
-
-        .flip-card .top,
-        .flip-card .bottom,
-        .flip-card .back-top,
-        .flip-card .back-bottom {
-            height: 70px;
-            color: var(--flip-color);
-            background-color: var(--flip-bg);
-            padding: 0 10px;
-            border-radius: 10px 10px 0 0;
-            overflow: hidden;
-            position: relative;
+        .subscribe-section input[type="email"] {
+            padding: 10px;
+            width: 70%;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
-
-        .flip-card .top,
-        .flip-card .back-top {
-            line-height: 140px;
-            border-bottom: 1px solid #000;
+        .subscribe-section input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
-
-        .flip-card .bottom,
-        .flip-card .back-bottom {
-            line-height: 0;
-            border-radius: 0 0 10px 10px;
+        .subscribe-section input[type="submit"]:hover {
+            background-color: #333;
         }
-
-        .flip-card .top::before,
-        .flip-card .bottom::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.1);
-            height: 5px;
-            z-index: 5;
-        }
-
-        .flip-card .top::before {
-            bottom: 0;
-        }
-
-        .flip-card .bottom::after {
-            top: 0;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            padding: 12px 30px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            margin-top: 30px;
-        }
-
-        .cta-button:hover {
-            background-color: var(--text-color);
-        }
-
         footer {
-            background-color: var(--neutral-color);
-            color: var(--text-color);
+            background-color: #444;
+            color: white;
             text-align: center;
-            padding: 20px 0;
-            font-size: 0.9rem;
-            position: absolute;
+            padding: 10px 0;
+            position: fixed;
             bottom: 0;
             width: 100%;
         }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .flip-card {
-                font-size: 100px;
-                line-height: 100px;
-                padding-bottom: 85px;
-            }
-
-            .flip-card .top,
-            .flip-card .bottom,
-            .flip-card .back-top,
-            .flip-card .back-bottom {
-                height: 50px;
-            }
-
-            .flip-card .top,
-            .flip-card .back-top {
-                line-height: 100px;
-            }
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
         }
     </style>
 </head>
 <body>
     <header>
-        <nav class="container">
-            <div class="logo">SingularityClock</div>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#features">Features</a>
-                <a href="#data">Data</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </nav>
+        <h1>Singularity Clock</h1>
     </header>
-
-    <main>
-        <section class="hero">
-            <h1>Singularity Clock</h1>
-            <div class="flip-clock">
-                <div class="flip-unit">
-                    <div class="flip-card">
-                        <div class="top">2</div>
-                        <div class="bottom">2</div>
-                    </div>
-                </div>
-                <div class="flip-unit">
-                    <div class="flip-card">
-                        <div class="top">2</div>
-                        <div class="bottom">2</div>
-                    </div>
-                </div>
-                <div class="flip-unit">
-                    <div class="flip-card">
-                        <div class="top">:</div>
-                        <div class="bottom">:</div>
-                    </div>
-                </div>
-                <div class="flip-unit">
-                    <div class="flip-card">
-                        <div class="top">0</div>
-                        <div class="bottom">0</div>
-                    </div>
-                </div>
-                <div class="flip-unit">
-                    <div class="flip-card">
-                        <div class="top">5</div>
-                        <div class="bottom">5</div>
-                    </div>
-                </div>
-            </div>
-            <a href="#" class="cta-button">Learn More</a>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Singularity Clock. All rights reserved.</p>
+    <div class="container">
+        <h2>Predicting the Future of AI Adoption</h2>
+        <p>We are building a comprehensive platform to track and predict the outcomes of the introduction of broad AI into society. Through meticulous analysis of employment trends, investment patterns, and various economic indicators, coupled with Moore's Law and other predictive models, we aim to provide real-time insights into how quickly AI adoption is accelerating.</p>
+        
+        <h3>What We Do</h3>
+        <p><strong>Employment Analysis:</strong> Monitoring shifts in employment and unemployment rates across sectors.</p>
+        <p><strong>Investment Trends:</strong> Tracking where money is flowing in the AI space.</p>
+        <p><strong>Economic Indicators:</strong> Utilizing macro and microeconomic data to gauge AI’s impact.</p>
+        <p><strong>Predictive Modeling:</strong> Applying laws like Moore’s Law to forecast AI advancements.</p>
+        <p><strong>Crowdsourcing Feedback:</strong> Gathering insights from workers in diverse industries.</p>
+        
+        <div class="subscribe-section">
+            <h3>Join Us on This Journey</h3>
+            <p>Stay informed. Understand the future. Be a part of the conversation.</p>
+            <form action="#" method="POST">
+                <input type="email" name="email" placeholder="Enter your email">
+                <input type="submit" value="Subscribe">
+            </form>
         </div>
+        
+        <h3>Contact Us</h3>
+        <p>For inquiries and collaborations, please email us at <a href="mailto:info@singularityclock.org">info@singularityclock.org</a>.</p>
+    </div>
+    <footer>
+        <p>Follow Us: <a href="#">Twitter</a> | <a href="#">LinkedIn</a> | <a href="#">Facebook</a></p>
+        <p>© 2024 Singularity Clock. All rights reserved.</p>
     </footer>
 </body>
 </html>
