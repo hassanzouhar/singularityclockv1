@@ -272,7 +272,7 @@
         $(document).ready(function() {
             var clock = $('.clock').FlipClock({
                 clockFace: 'TwentyFourHourClock',
-                autoStart: true,
+                autoStart: false,
                 callbacks: {
                     stop: function() {
                         $('.message').html('The clock has stopped!')
@@ -280,8 +280,9 @@
                 }
             });
 
-            clock.setTime(81480); // Set the time to 22:45
-            clock.setCountdown(false); // This ensures it counts up
+            // Set the clock to 22:44 (81480 seconds since midnight)
+            clock.setTime(81480);
+            // Start the clock
             clock.start();
         });
     </script>
