@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Singularity Clock | The Future of AI Integration</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <title>Singularity Clock | Forecasting AI Evolution</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap');
 
         :root {
-            --primary-color: #00ffff;
+            --bg-color: #0a0a0a;
+            --text-color: #e0e0e0;
+            --accent-color: #00f0ff;
             --secondary-color: #ff00ff;
-            --bg-color: #000011;
-            --text-color: #ffffff;
+            --neumorphic-light: #1a1a1a;
+            --neumorphic-dark: #050505;
         }
 
         * {
@@ -25,213 +24,184 @@
         }
 
         body, html {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Space Grotesk', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
+            line-height: 1.6;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
-        #canvas-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: -1;
-        }
-
-        .content {
-            position: relative;
-            z-index: 1;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         header {
+            background: linear-gradient(to right, var(--neumorphic-dark), var(--neumorphic-light));
+            padding: 20px 0;
             position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
-            padding: 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 240, 255, 0.1);
+        }
+
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 10;
-            background: rgba(0, 0, 17, 0.8);
-            backdrop-filter: blur(10px);
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
         }
 
-        nav a {
+        .nav-links a {
             color: var(--text-color);
             text-decoration: none;
-            margin-left: 20px;
-            position: relative;
-            overflow: hidden;
+            margin-left: 30px;
+            font-weight: 400;
             transition: color 0.3s ease;
         }
 
-        nav a:hover {
-            color: var(--primary-color);
-        }
-
-        nav a::before {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-        }
-
-        nav a:hover::before {
-            transform: translateX(0);
+        .nav-links a:hover {
+            color: var(--accent-color);
         }
 
         .hero {
             height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 0 20px;
+            background: linear-gradient(45deg, rgba(10,10,10,0.8), rgba(26,26,26,0.8)),
+                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, transparent 20%, var(--bg-color) 80%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
 
         h1 {
             font-size: 4rem;
             margin-bottom: 20px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            opacity: 0;
-            transform: translateY(50px);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .tagline {
             font-size: 1.5rem;
             margin-bottom: 40px;
-            opacity: 0;
-            transform: translateY(50px);
+            font-weight: 300;
         }
 
         .cta-button {
             display: inline-block;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
             color: var(--bg-color);
-            border: none;
             padding: 12px 30px;
             text-decoration: none;
             font-weight: 700;
-            border-radius: 30px;
+            border-radius: 50px;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(50px);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 240, 255, 0.3);
         }
 
         .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 240, 255, 0.4);
         }
 
         .features {
-            padding: 100px 20px;
+            padding: 100px 0;
+            background-color: var(--neumorphic-dark);
         }
 
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
         .feature-item {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--neumorphic-light);
             padding: 30px;
-            border-radius: 15px;
+            border-radius: 20px;
+            box-shadow: 10px 10px 20px var(--neumorphic-dark),
+                        -10px -10px 20px var(--neumorphic-light);
             transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(50px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-item::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            z-index: -1;
-            filter: blur(10px);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .feature-item:hover::before {
-            opacity: 1;
         }
 
         .feature-item:hover {
-            transform: translateY(-10px) scale(1.03);
+            transform: translateY(-10px);
+            box-shadow: 15px 15px 30px var(--neumorphic-dark),
+                        -15px -15px 30px var(--neumorphic-light);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
         }
 
         .feature-item h3 {
             font-size: 1.5rem;
             margin-bottom: 15px;
-            color: var(--primary-color);
+            color: var(--accent-color);
         }
 
         .data-viz {
-            padding: 100px 20px;
-            text-align: center;
+            padding: 100px 0;
+            background-color: var(--bg-color);
         }
 
         .data-viz h2 {
             font-size: 2.5rem;
             margin-bottom: 40px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         #ai-progress-chart {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
+            background: var(--neumorphic-light);
+            border-radius: 20px;
             padding: 20px;
+            box-shadow: inset 5px 5px 10px var(--neumorphic-dark),
+                        inset -5px -5px 10px var(--neumorphic-light);
         }
 
         footer {
+            background-color: var(--neumorphic-dark);
+            color: var(--text-color);
             text-align: center;
-            padding: 40px 20px;
-            background: rgba(0, 0, 17, 0.8);
-            backdrop-filter: blur(10px);
-        }
-
-        #clock {
-            font-size: 2rem;
-            margin-top: 20px;
-            opacity: 0;
+            padding: 20px 0;
+            font-size: 0.9rem;
         }
 
         @media (max-width: 768px) {
@@ -250,141 +220,70 @@
     </style>
 </head>
 <body>
-    <div id="canvas-container"></div>
-    
-    <div class="content">
-        <header>
+    <header>
+        <nav class="container">
             <div class="logo">SingularityClock</div>
-            <nav>
+            <div class="nav-links">
                 <a href="#about">About</a>
                 <a href="#features">Features</a>
                 <a href="#data">Data</a>
                 <a href="#contact">Contact</a>
-            </nav>
-        </header>
+            </div>
+        </nav>
+    </header>
 
-        <section class="hero">
-            <h1>Singularity Clock</h1>
-            <p class="tagline">Decoding the Convergence of AI and Human Intelligence</p>
-            <a href="#" class="cta-button">Explore the Future</a>
-            <div id="clock"></div>
+    <main>
+        <section id="about" class="hero">
+            <div class="hero-content">
+                <h1>Singularity Clock</h1>
+                <p class="tagline">Decoding the Future of AI Integration</p>
+                <a href="#" class="cta-button">Explore the Future</a>
+            </div>
         </section>
 
         <section id="features" class="features">
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <h3>Quantum-Enhanced Predictions</h3>
-                    <p>Harness quantum computing algorithms to forecast AI integration with unprecedented accuracy.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>Neural Network Visualization</h3>
-                    <p>Immerse yourself in 3D representations of evolving AI architectures and their impact.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>Global AI Sentiment Analysis</h3>
-                    <p>Real-time analysis of global discourse on AI, powered by advanced NLP models.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>Ethical AI Integration Tracker</h3>
-                    <p>Monitor and evaluate the ethical implications of AI adoption across industries.</p>
+            <div class="container">
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <i class="fas fa-brain feature-icon"></i>
+                        <h3>Quantum Predictions</h3>
+                        <p>Harness quantum algorithms for unparalleled AI forecasting accuracy.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-network-wired feature-icon"></i>
+                        <h3>Neural Visualization</h3>
+                        <p>Immerse in 3D representations of evolving AI architectures.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-globe feature-icon"></i>
+                        <h3>Global AI Sentiment</h3>
+                        <p>Real-time analysis of worldwide AI discourse and trends.</p>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-balance-scale feature-icon"></i>
+                        <h3>Ethical AI Tracker</h3>
+                        <p>Monitor and evaluate ethical implications of AI adoption.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="data" class="data-viz">
-            <h2>AI Progress Visualization</h2>
-            <canvas id="ai-progress-chart"></canvas>
+            <div class="container">
+                <h2>AI Progress Visualization</h2>
+                <canvas id="ai-progress-chart"></canvas>
+            </div>
         </section>
+    </main>
 
-        <footer>
+    <footer>
+        <div class="container">
             <p>&copy; 2024 Singularity Clock. Illuminating the path to technological transcendence.</p>
-        </footer>
-    </div>
+        </div>
+    </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <script>
-        // Three.js setup
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('canvas-container').appendChild(renderer.domElement);
-
-        // Create particles
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 5000;
-        const posArray = new Float32Array(particlesCount * 3);
-
-        for (let i = 0; i < particlesCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 5;
-        }
-
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.005,
-            color: 0x00ffff,
-            transparent: true,
-            opacity: 0.8,
-            blending: THREE.AdditiveBlending,
-        });
-
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
-
-        camera.position.z = 3;
-
-        // Mouse interaction
-        let mouseX = 0;
-        let mouseY = 0;
-
-        function onDocumentMouseMove(event) {
-            mouseX = (event.clientX - window.innerWidth / 2) / 100;
-            mouseY = (event.clientY - window.innerHeight / 2) / 100;
-        }
-
-        document.addEventListener('mousemove', onDocumentMouseMove);
-
-        // Animation
-        function animate() {
-            requestAnimationFrame(animate);
-            particlesMesh.rotation.y += 0.001;
-            particlesMesh.rotation.x += 0.001;
-
-            // Responsive to mouse movement
-            particlesMesh.rotation.x += mouseY * 0.0005;
-            particlesMesh.rotation.y += mouseX * 0.0005;
-
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        // Resize handler
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        // GSAP Animations
-        gsap.registerPlugin(ScrollTrigger);
-
-        gsap.from('h1', { opacity: 0, y: 50, duration: 1, delay: 0.5 });
-        gsap.from('.tagline', { opacity: 0, y: 50, duration: 1, delay: 0.7 });
-        gsap.from('.cta-button', { opacity: 0, y: 50, duration: 1, delay: 0.9 });
-        gsap.from('#clock', { opacity: 0, y: 50, duration: 1, delay: 1.1 });
-
-        gsap.utils.toArray('.feature-item').forEach((item, index) => {
-            gsap.from(item, {
-                opacity: 0,
-                y: 50,
-                duration: 1,
-                scrollTrigger: {
-                    trigger: item,
-                    start: 'top 80%',
-                }
-            });
-        });
-
         // Chart.js setup
         const ctx = document.getElementById('ai-progress-chart').getContext('2d');
         const chart = new Chart(ctx, {
@@ -394,49 +293,48 @@
                 datasets: [{
                     label: 'AI Integration Progress',
                     data: [20, 35, 55, 75, 90, 98],
-                    borderColor: 'rgb(0, 255, 255)',
-                    backgroundColor: 'rgba(0, 255, 255, 0.1)',
-                    tension: 0.4
+                    borderColor: '#00f0ff',
+                    backgroundColor: 'rgba(0, 240, 255, 0.1)',
+                    tension: 0.4,
+                    borderWidth: 3,
+                    pointBackgroundColor: '#ff00ff',
+                    pointBorderColor: '#00f0ff',
+                    pointRadius: 6,
+                    pointHoverRadius: 8
                 }]
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     y: {
                         beginAtZero: true,
                         max: 100,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
                         ticks: {
-                            color: 'rgb(255, 255, 255)'
+                            color: '#e0e0e0'
                         }
                     },
                     x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
                         ticks: {
-                            color: 'rgb(255, 255, 255)'
+                            color: '#e0e0e0'
                         }
                     }
                 },
                 plugins: {
                     legend: {
                         labels: {
-                            color: 'rgb(255, 255, 255)'
+                            color: '#e0e0e0'
                         }
                     }
                 }
             }
         });
-
-        // Futuristic clock
-        function updateClock() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString();
-            document.getElementById('clock').textContent = timeString;
-
-            // Add a futuristic touch by showing milliseconds
-            const milliseconds = now.getMilliseconds().toString().padStart(3, '0');
-            document.getElementById('clock').textContent += `.${milliseconds}`;
-        }
-
-        setInterval(updateClock, 1);
     </script>
 </body>
 </html>
