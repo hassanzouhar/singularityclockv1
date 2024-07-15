@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Singularity Clock</title>
+    <title>SingularityClock</title>
     <style>
         body {
             margin: 0;
@@ -120,6 +120,11 @@
             color: #fff;
         }
 
+        .clock {
+            margin: 50px auto;
+            transform: scale(0.8);
+        }
+
         @media (max-width: 768px) {
             header {
                 font-size: 2.5em;
@@ -191,6 +196,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.css">
 </head>
 
 <body>
@@ -198,6 +204,7 @@
         Singularity Clock
     </header>
     <div class="container">
+        <div class="clock"></div>
         <div class="info-section">
             <h2>Predicting the Future of <span class="highlight">AI</span> Adoption</h2>
             <p>We are building a comprehensive platform to track and predict the outcomes of the introduction of broad AI into society. Through meticulous analysis of employment trends, investment patterns, and various economic indicators, coupled with Moore's Law and other predictive models, we aim to provide real-time insights into how quickly AI adoption is accelerating.</p>
@@ -227,6 +234,19 @@
         <p>Follow Us: <a href="#">Twitter</a> | <a href="#">LinkedIn</a> | <a href="#">Facebook</a></p>
         <p>© 2024 Singularity Clock. All rights reserved.</p>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var clock = $('.clock').FlipClock({
+                clockFace: 'TwentyFourHourClock'
+            });
+            
+            setTimeout(function() {
+                clock.setTime(81450); // 22:44 in seconds
+                clock.increment();
+            }, 1000);
+        });
+    </script>
 </body>
 
 </html>
