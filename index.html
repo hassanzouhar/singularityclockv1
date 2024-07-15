@@ -6,29 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Singularity Clock</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Orbitron', sans-serif;
-            background: radial-gradient(circle, #1e1e1e, #121212);
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1e1e1e, #121212);
             color: #fff;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         header {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
-            background: linear-gradient(45deg, #00ff87, #00bfff);
+            background: linear-gradient(135deg, #00ff87 30%, #00bfff 70%);
             color: #000;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
         }
 
         header h1 {
+            font-family: 'Orbitron', sans-serif;
             font-size: 6em;
+            margin: 0;
             text-transform: uppercase;
             animation: neon 1.5s infinite alternate;
         }
@@ -43,34 +50,48 @@
         }
 
         .container {
-            padding: 60px 20px;
-            transform: skewY(-3deg);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border-radius: 10px;
-            margin: -50px auto 0;
+            flex: 1;
             width: 80%;
-            max-width: 1000px;
-            transition: transform 0.3s;
+            max-width: 1200px;
+            margin: -100px auto 40px auto;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transform: translateY(50px);
+            animation: slideUp 1s ease-out forwards;
         }
 
-        .container:hover {
-            transform: skewY(0deg);
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(50px);
+                opacity: 1;
+            }
         }
 
         .info-section {
             margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s, background 0.3s;
         }
 
         .info-section:hover {
             transform: scale(1.05);
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(255, 255, 255, 0.2);
         }
 
-        .info-section h2, .info-section h3 {
+        .info-section h2,
+        .info-section h3 {
+            font-family: 'Orbitron', sans-serif;
             font-size: 2.5em;
             margin-bottom: 20px;
             text-transform: uppercase;
@@ -82,27 +103,29 @@
 
         .info-section p {
             font-size: 1.2em;
-            line-height: 1.6;
+            line-height: 1.8;
             color: #e0e0e0;
+            margin-bottom: 20px;
         }
 
         .subscribe-section {
             padding: 40px 20px;
             text-align: center;
-            background: #00ff87;
+            background: linear-gradient(135deg, #00ff87 30%, #00bfff 70%);
             color: #000;
             border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             margin-bottom: 40px;
-            transform: skewX(-5deg);
-            transition: transform 0.3s;
+            transition: transform 0.3s, background 0.3s;
         }
 
         .subscribe-section:hover {
-            transform: skewX(0deg);
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #00bfff 30%, #00ff87 70%);
         }
 
         .subscribe-section h3 {
+            font-family: 'Orbitron', sans-serif;
             font-size: 2.5em;
             margin-bottom: 20px;
             text-transform: uppercase;
@@ -137,13 +160,14 @@
         }
 
         footer {
-            background: #00ff87;
+            background: linear-gradient(135deg, #00ff87, #00bfff);
             color: #000;
             text-align: center;
             padding: 20px 0;
             border-top: 3px solid #00bfff;
             position: relative;
-            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+            clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
         }
 
         footer a {
@@ -154,7 +178,7 @@
         }
 
         footer a:hover {
-            color: #00bfff;
+            color: #00ff87;
         }
 
         footer p {
