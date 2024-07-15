@@ -45,10 +45,7 @@
             padding: 20px;
             border: 5px solid #000;
             box-shadow: 10px 10px 0 #000;
-        }
-
-        .info-section {
-            background: #e0e0e0;
+            opacity: 0; /* For ScrollMagic animation */
         }
 
         h2, h3 {
@@ -191,18 +188,22 @@
             }
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/animation.gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
 </head>
 
 <body>
-    <header>
+    <header id="header">
         Singularity Clock
     </header>
     <div class="container">
-        <div class="info-section">
+        <div class="info-section" id="typed-text-container">
             <h2>Predicting the Future of <span class="highlight">AI</span> Adoption</h2>
             <p>We are building a comprehensive platform to track and predict the outcomes of the introduction of broad AI into society. Through meticulous analysis of employment trends, investment patterns, and various economic indicators, coupled with Moore's Law and other predictive models, we aim to provide real-time insights into how quickly AI adoption is accelerating.</p>
         </div>
-        <div class="info-section">
+        <div class="info-section" id="info-section-1">
             <h3>What We Do</h3>
             <p><strong>Employment Analysis:</strong> Monitoring shifts in employment and unemployment rates across sectors.</p>
             <p><strong>Investment Trends:</strong> Tracking where money is flowing in the AI space.</p>
@@ -210,7 +211,7 @@
             <p><strong>Predictive Modeling:</strong> Applying laws like Moore’s Law to forecast AI advancements.</p>
             <p><strong>Crowdsourcing Feedback:</strong> Gathering insights from workers in diverse industries.</p>
         </div>
-        <div class="subscribe-section">
+        <div class="subscribe-section" id="subscribe-section">
             <h3>Join Us on This Journey</h3>
             <p>Stay informed. Understand the future. Be a part of the conversation.</p>
             <form action="#" method="POST">
@@ -227,6 +228,32 @@
         <p>Follow Us: <a href="#">Twitter</a> | <a href="#">LinkedIn</a> | <a href="#">Facebook</a></p>
         <p>© 2024 Singularity Clock. All rights reserved.</p>
     </footer>
+    <script>
+        // GSAP Animations
+        gsap.from("#header", { duration: 1, y: -100, ease: "bounce" });
+        gsap.from(".info-section", { duration: 1, opacity: 0, stagger: 0.2 });
+
+        // ScrollMagic Animations
+        var controller = new ScrollMagic.Controller();
+        new ScrollMagic.Scene({
+                triggerElement: "#info-section-1"
+            })
+            .setTween("#info-section-1", { duration: 1, opacity: 1, y: -50 })
+            .addTo(controller);
+
+        new ScrollMagic.Scene({
+                triggerElement: "#subscribe-section"
+            })
+            .setTween("#subscribe-section", { duration: 1, opacity: 1, y: -50 })
+            .addTo(controller);
+
+        // Typed.js for typing effect
+        var typed = new Typed("#typed-text-container h2", {
+            strings: ["Predicting the Future of AI Adoption"],
+            typeSpeed: 50,
+            loop: true
+        });
+    </script>
 </body>
 
 </html>
