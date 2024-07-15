@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Courier New', Courier, monospace;
-            background: #dff2f2;
+            background: #fff;
             color: #000;
             display: flex;
             flex-direction: column;
@@ -18,38 +18,14 @@
         }
 
         header {
-            background: #ffaa00;
+            background: #ffcd00;
             color: #000;
-            padding: 40px 20px;
+            padding: 20px;
             text-align: center;
-            font-size: 3.5em;
+            font-size: 3em;
             text-transform: uppercase;
             border-bottom: 5px solid #000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 15px 15px 0 #000;
-        }
-
-        header .logo {
-            font-size: 0.8em;
-            text-align: left;
-        }
-
-        header .menu {
-            display: flex;
-            gap: 20px;
-        }
-
-        header .menu a {
-            color: #000;
-            text-decoration: none;
-            font-size: 1em;
-            transition: color 0.3s;
-        }
-
-        header .menu a:hover {
-            color: #fff;
+            box-shadow: 10px 10px 0 #000;
         }
 
         .container {
@@ -58,23 +34,27 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 20px;
+        }
+
+        .info-section, .subscribe-section {
+            width: 100%;
+            max-width: 1200px;
+            background: #e0e0e0;
+            margin: 10px 0;
+            padding: 20px;
+            border: 5px solid #000;
+            box-shadow: 10px 10px 0 #000;
         }
 
         .info-section {
-            width: 100%;
-            max-width: 1200px;
-            background: #fff;
-            margin: 30px 0;
-            padding: 30px;
-            border: 5px solid #000;
-            box-shadow: 10px 10px 0 #000;
-            position: relative;
+            background: #e0e0e0;
         }
 
         h2, h3 {
             margin: 0;
             padding: 0;
-            font-size: 2.5em;
+            font-size: 2em;
             text-transform: uppercase;
             margin-bottom: 20px;
         }
@@ -86,21 +66,14 @@
         }
 
         .highlight {
-            color: #ffaa00;
+            color: #ffcd00;
             background-color: #000;
             padding: 2px 5px;
         }
 
         .subscribe-section {
-            background: #00c6a7;
-            color: #000;
-            padding: 40px;
-            width: 100%;
-            max-width: 1200px;
+            background: #ffcd00;
             text-align: center;
-            border: 5px solid #000;
-            box-shadow: 10px 10px 0 #000;
-            position: relative;
         }
 
         .subscribe-section input[type="email"] {
@@ -129,10 +102,10 @@
         }
 
         footer {
-            background: #00c6a7;
+            background: #ffcd00;
             color: #000;
             text-align: center;
-            padding: 30px;
+            padding: 20px;
             border-top: 5px solid #000;
         }
 
@@ -148,18 +121,6 @@
         }
 
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-            }
-
-            header .menu {
-                flex-direction: column;
-            }
-
-            header .menu a {
-                margin-bottom: 10px;
-            }
-
             .subscribe-section input[type="email"] {
                 width: 80%;
             }
@@ -169,12 +130,7 @@
 
 <body>
     <header>
-        <div class="logo">Singularity Clock</div>
-        <div class="menu">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-        </div>
+        Singularity Clock
     </header>
     <div class="container">
         <div class="info-section">
