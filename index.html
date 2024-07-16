@@ -131,19 +131,19 @@
         }
 
         .digit {
-            width: 50px;
-            height: 50px;
+            width: 80px;
+            height: 80px;
             background: #ffcd00;
-            border: 3px solid #000;
+            border: 5px solid #000;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5em;
+            font-size: 3em;
             box-shadow: 5px 5px 0 #000;
         }
 
         .colon {
-            font-size: 2em;
+            font-size: 3em;
         }
     </style>
 </head>
@@ -214,14 +214,41 @@
         }
 
         function updateClock() {
-            // Set the clock time to indicate the proximity to the singularity event, e.g., "23:58:00"
-            const singularityTime = "235800";
-            for (let i = 0; i < 6; i++) {
-                digitElements[i].textContent = singularityTime[i];
-            }
+            // Set the initial clock time to "22:44:30"
+            let hours = 22;
+            let minutes = 44;
+            let seconds = 30;
+
+            const interval = setInterval(() => {
+                seconds++;
+                if (seconds === 60) {
+                    seconds = 0;
+                    minutes++;
+                    if (minutes === 60) {
+                        minutes = 0;
+                        hours++;
+                    }
+                }
+
+                // Format the time values to always be two digits
+                const formattedTime = [
+                    hours.toString().padStart(2, '0'),
+                    minutes.toString().padStart(2, '0'),
+                    seconds.toString().padStart(2, '0')
+                ].join('');
+
+                for (let i = 0; i < 6; i++) {
+                    digitElements[i].textContent = formattedTime[i];
+                }
+
+                // Stop the interval at "22:45:00"
+                if (hours === 22 && minutes === 45 && seconds === 0) {
+                    clearInterval(interval);
+                }
+            }, 1000);
         }
 
-        updateClock(); // Set the initial clock time
+        updateClock(); // Set the initial clock time and start the progression
     </script>
 </body>
 
