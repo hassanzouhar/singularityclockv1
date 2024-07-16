@@ -174,15 +174,15 @@
         .glitch-text::before {
             content: "0";
             position: absolute;
-            animation: glitch-text 0.2s steps(1) infinite;
+            animation: glitch-text 0.2s steps(3) infinite;
         }
 
         @keyframes glitch-text {
             0%, 100% {
-                content: "1";
+                content: "0";
             }
             50% {
-                content: "2";
+                content: "1";
             }
         }
 
