@@ -214,19 +214,14 @@
         }
 
         function updateClock() {
-            const now = new Date();
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
-            const timeString = hours + minutes + seconds;
-
+            // Set the clock time to indicate the proximity to the singularity event, e.g., "23:58:00"
+            const singularityTime = "235800";
             for (let i = 0; i < 6; i++) {
-                digitElements[i].textContent = timeString[i];
+                digitElements[i].textContent = singularityTime[i];
             }
         }
 
-        setInterval(updateClock, 1000);
-        updateClock(); // Initial call to display the clock immediately
+        updateClock(); // Set the initial clock time
     </script>
 </body>
 
