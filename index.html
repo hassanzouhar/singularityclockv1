@@ -15,6 +15,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            align-items: center;
         }
 
         header {
@@ -26,6 +27,7 @@
             text-transform: uppercase;
             border-bottom: 5px solid #000;
             box-shadow: 10px 10px 0 #000;
+            width: 100%;
         }
 
         .container {
@@ -107,6 +109,7 @@
             text-align: center;
             padding: 20px;
             border-top: 5px solid #000;
+            width: 100%;
         }
 
         footer a {
@@ -121,115 +124,23 @@
         }
 
         .clock {
-            margin: 50px auto;
-            transform: scale(0.8);
-        }
-
-        /* Brutalist style for the FlipClock */
-        .flip-clock-wrapper {
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(6, 50px);
             gap: 10px;
         }
 
-        .flip-clock-wrapper ul {
+        .digit {
+            width: 50px;
+            height: 50px;
             background: #ffcd00;
-            border: 5px solid #000;
-            box-shadow: 10px 10px 0 #000;
-            color: #000;
-            font-size: 3em;
-        }
-
-        .flip-clock-wrapper .flip-clock-meridium {
-            display: none;
-        }
-
-        .flip-clock-wrapper ul li {
-            line-height: 1.2em;
-        }
-
-        .flip-clock-wrapper ul li a div {
-            color: #000;
-        }
-
-        .flip-clock-wrapper ul li a div.inn {
-            background: none;
-            border: none;
-        }
-
-        @media (max-width: 768px) {
-            header {
-                font-size: 2.5em;
-            }
-
-            .info-section, .subscribe-section {
-                padding: 15px;
-                box-shadow: 5px 5px 0 #000;
-            }
-
-            h2, h3 {
-                font-size: 1.5em;
-            }
-
-            .subscribe-section input[type="email"] {
-                width: 80%;
-            }
-
-            .subscribe-section input[type="submit"] {
-                padding: 10px 20px;
-                font-size: 1em;
-            }
-
-            footer {
-                padding: 15px;
-            }
-
-            footer a {
-                margin: 0 10px;
-                font-size: 1em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header {
-                font-size: 2em;
-                padding: 15px;
-            }
-
-            .info-section, .subscribe-section {
-                padding: 10px;
-                box-shadow: 3px 3px 0 #000;
-            }
-
-            h2, h3 {
-                font-size: 1.2em;
-            }
-
-            p {
-                font-size: 1em;
-            }
-
-            .subscribe-section input[type="email"] {
-                width: 90%;
-            }
-
-            .subscribe-section input[type="submit"] {
-                padding: 10px 15px;
-                font-size: 0.9em;
-            }
-
-            footer {
-                padding: 10px;
-            }
-
-            footer a {
-                margin: 0 5px;
-                font-size: 0.9em;
-            }
+            border: 3px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            box-shadow: 5px 5px 0 #000;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -237,7 +148,9 @@
         Singularity Clock
     </header>
     <div class="container">
-        <div class="clock"></div>
+        <div class="clock" id="clock">
+            <!-- Individual digit containers will be inserted here by JavaScript -->
+        </div>
         <div class="info-section">
             <h2>Predicting the Future of <span class="highlight">AI</span> Adoption</h2>
             <p>We are building a comprehensive platform to track and predict the outcomes of the introduction of broad AI into society. Through meticulous analysis of employment trends, investment patterns, and various economic indicators, coupled with Moore's Law and other predictive models, we aim to provide real-time insights into how quickly AI adoption is accelerating.</p>
@@ -267,24 +180,30 @@
         <p>Follow Us: <a href="#">Twitter</a> | <a href="#">LinkedIn</a> | <a href="#">Facebook</a></p>
         <p>© 2024 Singularity Clock. All rights reserved.</p>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
     <script>
-        $(document).ready(function() {
-            var clock = $('.clock').FlipClock({
-                clockFace: 'TwentyFourHourClock',
-                autoStart: false,
-                callbacks: {
-                    stop: function() {
-                        $('.message').html('The clock has stopped!')
-                    }
-                }
-            });
+        const clockElement = document.getElementById('clock');
+        const digitElements = [];
+        for (let i = 0; i < 6; i++) {
+            const digitElement = document.createElement('div');
+            digitElement.className = 'digit';
+            clockElement.appendChild(digitElement);
+            digitElements.push(digitElement);
+        }
 
-            // Set the clock to 22:44 (81480 seconds since midnight)
-            clock.setTime(81480);
-            // Start the clock
-            clock.start();
-        });
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const timeString = hours + minutes + seconds;
+
+            for (let i = 0; i < 6; i++) {
+                digitElements[i].textContent = timeString[i];
+            }
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call to display the clock immediately
     </script>
 </body>
 
