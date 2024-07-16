@@ -124,8 +124,9 @@
         }
 
         .clock {
-            display: grid;
-            grid-template-columns: repeat(6, 50px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             gap: 10px;
         }
 
@@ -139,6 +140,10 @@
             align-items: center;
             font-size: 1.5em;
             box-shadow: 5px 5px 0 #000;
+        }
+
+        .colon {
+            font-size: 2em;
         }
     </style>
 </head>
@@ -183,11 +188,29 @@
     <script>
         const clockElement = document.getElementById('clock');
         const digitElements = [];
-        for (let i = 0; i < 6; i++) {
+
+        function createDigitElement() {
             const digitElement = document.createElement('div');
             digitElement.className = 'digit';
+            return digitElement;
+        }
+
+        function createColonElement() {
+            const colonElement = document.createElement('div');
+            colonElement.className = 'colon';
+            colonElement.textContent = ':';
+            return colonElement;
+        }
+
+        for (let i = 0; i < 6; i++) {
+            const digitElement = createDigitElement();
             clockElement.appendChild(digitElement);
             digitElements.push(digitElement);
+
+            if (i === 1 || i === 3) {
+                const colonElement = createColonElement();
+                clockElement.appendChild(colonElement);
+            }
         }
 
         function updateClock() {
