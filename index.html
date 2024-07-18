@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/react';
 <!DOCTYPE html>
 <html lang="en">
 
@@ -290,7 +289,11 @@ import { Analytics } from '@vercel/analytics/react';
     </style>
 </head>
 
-<body><Analytics />
+<body>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
     <header>
         SingularityClock.org
     </header>
